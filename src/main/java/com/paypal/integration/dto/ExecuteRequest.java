@@ -9,10 +9,11 @@ import java.io.Serializable;
 
 @Data
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
-public class AuthorizePaymentResponse implements Serializable {
+@AllArgsConstructor
+public class ExecuteRequest implements Serializable {
 
-    private String url;
+    private String paymentId;
+    private String payerId;
 
 }

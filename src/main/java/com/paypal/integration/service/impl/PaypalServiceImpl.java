@@ -5,6 +5,7 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import com.paypal.integration.config.AppProperties;
 import com.paypal.integration.config.FEParamsEnum;
+import com.paypal.integration.dto.ExecuteRequest;
 import com.paypal.integration.model.FEParams;
 import com.paypal.integration.model.UserTransactions;
 import com.paypal.integration.model.Users;
@@ -40,11 +41,11 @@ public class PaypalServiceImpl implements PaypalService {
     }
 
     @Override
-    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
+    public Payment executePayment(ExecuteRequest executeRequest) throws PayPalRESTException {
         PaymentExecution paymentExecution = new PaymentExecution();
-        paymentExecution.setPayerId(payerId);
+        paymentExecution.setPayerId(executeRequest.getPayerId());
 
-        Payment payment = new Payment().setId(paymentId);
+        Payment payment = new Payment().setId(executeRequest.getPaymentId());
 
         APIContext apiContext = new APIContext(
                 appProperties.getPaypalConfig().getClientId(),
@@ -141,14 +142,14 @@ public class PaypalServiceImpl implements PaypalService {
         RedirectUrls redirectUrls = new RedirectUrls();
 
         Optional<FEParams> successUrl = this.feParamsService.getFEParamById(FEParamsEnum.CALLBACK_SUCCESS_LINK.getId());
-        Optional<FEParams> failureUrl = this.feParamsService.getFEParamById(FEParamsEnum.CALLBACK_FAILURE_LINK.getId());
+        Optional<FEParams> cancelUrl = this.feParamsService.getFEParamById(FEParamsEnum.CALLBACK_CANCEL_LINK.getId());
 
-        if (!successUrl.isPresent() || !failureUrl.isPresent()) {
-            LOGGER.error("Success and failure url not found");
+        if (!successUrl.isPresent() || !cancelUrl.isPresent()) {
+            LOGGER.error("Success and cancel url not found");
             return null;
         }
 
-        redirectUrls.setCancelUrl(failureUrl.get().getValue());
+        redirectUrls.setCancelUrl(cancelUrl.get().getValue());
         redirectUrls.setReturnUrl(successUrl.get().getValue());
 
         return redirectUrls;
