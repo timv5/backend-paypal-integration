@@ -18,6 +18,9 @@ spring:
 
 app:
   paypalConfig:
-    clientId:
-    clientSecret:
+    clientId: yourid
+    clientSecret: yoursecret
     mode: sandbox
+    method: paypal
+    intent: authorize
+    quantity: 1

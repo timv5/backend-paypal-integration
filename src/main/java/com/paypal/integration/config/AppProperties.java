@@ -17,6 +17,9 @@ public class AppProperties {
         private String clientId;
         private String clientSecret;
         private String mode;
+        private String method;
+        private String intent;
+        private String quantity;
 
     }
 

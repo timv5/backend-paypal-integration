@@ -1,5 +1,6 @@
 package com.paypal.integration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,10 +17,25 @@ public class UserTransactions {
     @Column(name = "total_cost")
     private double totalCost;
 
+    @Column(name = "product_cost")
+    private double productCost;
+
     @Column(name = "shipping_cost")
     private double shippingCost;
 
     @Column(name = "order_cost")
     private double orderCost;
+
+    @Column(name = "tax")
+    private double tax;
+
+    @Column(name = "currency")
+    private String currency;
+
+    @Column(name = "product_name")
+    private String productName;
+
+    @Column(name = "user_id")
+    private Long userId;
 
 }
