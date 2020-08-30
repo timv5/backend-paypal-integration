@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+  paypal-proxy:
+    driver: bridge
+
+services:
+
+  database:
+    image: 'library/postgres:latest'
+    env_file:
+      - database.env
+    restart: always
+    networks:
+      - paypal-proxy
+    ports:
+      - 5432:5432
+
+  backend-paypal-integration:
+    build:
+      context: .
+      dockerfile: .Dockerfile
+    container_name: backend-paypal-integration
+    networks:
+      - paypal-proxy
+    ports:
+      - 8081:8081
+    depends_on:
+      - database
