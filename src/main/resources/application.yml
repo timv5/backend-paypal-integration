@@ -18,8 +18,8 @@ spring:
 
 app:
   paypalConfig:
-    clientId: yourid
-    clientSecret: yoursecret
+    clientId: AYToUfLVeL7TNBwvPpkoE51hozKR4OBv3-xP6k7TLeSNdApdpnLRsTe0qr5ac8-i9xpPlsg82hCtMxXT
+    clientSecret: EGJNAE_V1OYKHtw5nv638E0hN44RUKERGFD4QIn9pdWAe1uVHXJT0Zqbz1G1lRudG8ZV47NKrVgn9kGs
     mode: sandbox
     method: paypal
     intent: authorize

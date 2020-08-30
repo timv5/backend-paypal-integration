@@ -23,9 +23,6 @@ public class UserTransactions {
     @Column(name = "shipping_cost")
     private double shippingCost;
 
-    @Column(name = "order_cost")
-    private double orderCost;
-
     @Column(name = "tax")
     private double tax;
 
