@@ -27,3 +27,16 @@ services:
       - 8081:8081
     depends_on:
       - database
+
+  frontend-paypal-integration:
+    build:
+      context: ../frontend-paypal-integration
+      dockerfile: .Dockerfile
+    container_name: frontend-paypal-integration
+    networks:
+      - paypal-proxy
+    ports:
+      - 4200:80
+    depends_on:
+      - database
+      - backend-paypal-integration

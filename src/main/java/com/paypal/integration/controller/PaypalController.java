@@ -61,6 +61,7 @@ public class PaypalController {
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
+            return new PaymentResponse(FEParamsEnum.CALLBACK_FAILURE_LINK.getValue(), "failure");
         }
 
         return new PaymentResponse(FEParamsEnum.CALLBACK_SUCCESS_LINK.getValue(), "success");

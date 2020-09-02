@@ -106,7 +106,6 @@ public class PaypalServiceImpl implements PaypalService {
         item.setName(userTransaction.getProductName());
         item.setPrice(String.valueOf(userTransaction.getProductCost()));
         item.setTax(String.valueOf(userTransaction.getTax()));
-        // change if you want to
         item.setQuantity(appProperties.getPaypalConfig().getQuantity());
 
         items.add(item);
@@ -158,7 +157,6 @@ public class PaypalServiceImpl implements PaypalService {
     private String extractApprovalLink(Payment payment) {
         List<Links> links = payment.getLinks();
         String approvedLink = null;
-
         for (Links link : links) {
             if (link.getRel().equalsIgnoreCase("approval_url")) {
                 approvedLink = link.getHref();
